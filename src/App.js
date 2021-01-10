@@ -1,8 +1,15 @@
 import React from 'react';
 
-const element = (<div style={{color: 'green', fontSize: 38}}>
-    Hello, World!
-    <br/> <a href={""}>go to start</a>
+const ItemList = () => (<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ul>);
+const App = () => (<div>
+    <h1 style={{color: 'red'}}>To do!</h1>
+    <ItemList/>
 </div>);
 
-export { element };
+export default App;
