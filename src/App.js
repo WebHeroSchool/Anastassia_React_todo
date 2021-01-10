@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import {counts, length} from "./number";
 
 const count = 17;
 const name = true;
@@ -14,6 +15,8 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+          <p>
+              {counts * length}
           <p style={{
               color: 'green'
           }}>
