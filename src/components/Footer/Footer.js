@@ -1,8 +1,8 @@
 import React from 'react';
-import './Footer.css';
+import styles from './Footer.module.css';
 
-const Footer = ({count}) => (<div className="wrap">
-    <p className="wrap__text">Осталось выполнить вот столько дел: {count}</p>
+const Footer = ({count}) => (<div className={styles.wrap}>
+    <p className={styles.text}>Осталось выполнить вот столько дел: {count}</p>
     <button>All</button>
     <button>Active</button>
     <button>Completed</button>

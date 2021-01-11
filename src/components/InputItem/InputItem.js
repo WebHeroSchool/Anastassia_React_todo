@@ -1,6 +1,6 @@
 import React from 'react';
-import './InputItem.css';
+import styles from './InputItem.module.css';
 
-const InputItem = () => (<button className="add">Добавь еще важное дело</button>);
+const InputItem = () => (<button className={styles.wrap}>Добавь еще важное дело</button>);
 
 export default InputItem;
