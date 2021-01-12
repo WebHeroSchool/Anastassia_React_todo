@@ -1,5 +1,9 @@
-.wrap {
-    background: darkcyan;
-    color: white;
-    font-weight: bolder;
+/*.wrap {*/
+/*    background: darkcyan;*/
+/*    color: white;*/
+/*    font-weight: bolder;*/
+/*}*/
+
+.root {
+    width: 100%;
 }
