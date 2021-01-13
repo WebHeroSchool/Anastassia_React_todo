@@ -7,13 +7,16 @@ import styles from "./App.module.css";
 const App = () => {
     const items = [
             {
-                value: 'Написать новое приложение на React'
+                value: 'Написать новое приложение на React',
+                isDone: true
             },
             {
-                value: 'Протестировать приложение'
+                value: 'Протестировать приложение',
+                isDone: false
             },
             {
-                value: 'Добавить приложение в портфолио'
+                value: 'Добавить приложение в портфолио',
+                isDone: false
             }
     ];
 
