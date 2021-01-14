@@ -7,3 +7,7 @@
 .root {
     width: 100%;
 }
+
+.root.MuiFormLabel-root:focus {
+    color: darkred;
+}
