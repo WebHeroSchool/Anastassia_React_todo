@@ -1,13 +1,25 @@
-/*.wrap {*/
-/*    background: darkcyan;*/
-/*    color: white;*/
-/*    font-weight: bolder;*/
-/*}*/
+
 
 .root {
     width: 100%;
 }
 
-.root.MuiFormLabel-root:focus {
-    color: darkred;
+.root.MuiInput-underline:before {
+    border-color: darkred;
 }
+
+.root.MuiInput-underline:after {
+    border-color: green;
+}
+
+.root .MuiFormLabel-root {
+    color: yellow;
+}
+
+.root.MuiFormLabel-root.Mui-focused {
+     color: darkred;
+}
+
+/*.root.MuiFormLabel-root.Mui-focused {*/
+/*    color: darkred;*/
+/*}*/
