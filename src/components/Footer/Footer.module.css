@@ -4,13 +4,7 @@
 
 }
 
-button {
-    background: darkcyan;
-    color: white;
-    font-weight: bolder;
-    cursor: pointer;
-}
-
-button:hover {
-    background: olivedrab;
+.button {
+    display: flex;
+    justify-content: space-between;
 }
