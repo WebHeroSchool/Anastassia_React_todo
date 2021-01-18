@@ -5,4 +5,10 @@
 
 .done {
     color: dimgray;
+    text-decoration: line-through;
+}
+
+.delete {
+    margin: -5px;
+    padding-left: 45px;
 }
