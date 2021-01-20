@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import styles from './Footer.module.css';
 
 const Footer = ({count}) => (<div className={styles.wrap}>
-    <p className={styles.text}>Осталось выполнить вот столько дел: {count}</p>
+    <p className={styles.text} >Осталось выполнить вот столько дел: {count}</p>
     <div className={styles.button}>
         <Button variant="contained" color="primary">
             All
