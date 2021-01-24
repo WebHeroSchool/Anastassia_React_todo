@@ -1,10 +1,13 @@
 .wrap {
     margin: auto;
-    width: max-content;
+    width: 50%;
     font-family: Papyrus;
 }
 
+
 .title {
     color: darkblue;
+    margin-left: 15px;
 }
+
 

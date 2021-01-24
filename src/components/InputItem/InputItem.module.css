@@ -1,3 +1,7 @@
 .root {
     width: 100%;
 }
+
+.wrap {
+    margin-left: 15px;
+}

@@ -1,26 +1,38 @@
 import React from 'react';
-import classnames from 'classnames';
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from '@material-ui/core/Checkbox';
+import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import {withStyles} from "@material-ui/core/styles";
 
-import styles from './Item.module.css';
+const styles = {
+    done: {
+        textDecoration: 'line-through',
+        color: 'dimgray'
+    }
+};
 
-const Item = ({value, isDone, onClickDone, id}) => (<div className={
-    classnames({
-        [styles.item]: true,
-        [styles.done]: isDone
-    })
-}>
-    <Checkbox
-        defaultChecked
-        color="primary"
-        inputProps={{ 'aria-label': 'secondary checkbox' }}
+const Item = ({value, isDone, classes, onClickDone, id, onClickDelete}) => (
+    <ListItem fullWidth>
+        <Checkbox
+            defaultChecked
+            color="primary"
+            inputProps={{ 'aria-label': 'secondary checkbox' }}
 
-        checked={isDone}
-        onClick={() => onClickDone(id)}
-    />
-    {value}
-    <DeleteIcon color="primary" className={styles.delete}/>
-</div>);
+            checked={isDone}
+            tabIndex={-1}
+            onClick={() => onClickDone(id)}
+        />
+        <ListItemText primary={value} classes={{
+            root: isDone && classes.done
+        }} />
+        <ListItemSecondaryAction>
+            <IconButton aria-label="Comments">
+                <DeleteIcon onClick={() => onClickDelete(id)}/>
+            </IconButton>
+        </ListItemSecondaryAction>
+    </ListItem>);
 
-export default Item;
+export default withStyles(styles) (Item);
