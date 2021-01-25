@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -34,5 +36,13 @@ const Item = ({value, isDone, classes, onClickDone, id, onClickDelete}) => (
             </IconButton>
         </ListItemSecondaryAction>
     </ListItem>);
+
+Item.propTypes = {
+    value: PropTypes.string.isRequired,
+    isDone: PropTypes.bool.isRequired,
+    onClickDone: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
+    onClickDelete: PropTypes.func.isRequired
+};
 
 export default withStyles(styles) (Item);
