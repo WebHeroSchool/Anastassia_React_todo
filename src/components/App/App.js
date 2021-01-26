@@ -42,9 +42,9 @@ const App = () => {
         const newItemList = items.map(item => {
             const newItem = {...item};
 
-                if (item.id === id) {
+            if (item.id === id) {
                 newItem.isDone = !item.isDone;
-                }
+            }
 
             return newItem;
         });
@@ -52,24 +52,16 @@ const App = () => {
         setItems(newItemList);
     };
 
-    const onClickDelete = id => {
-        const newItemList = items.filter(item => {
-            const newItem = {...item};
-
-             if (item.id !== id) {
-                return newItem;
-             }
-
-            return newItem;
-        });
+    const onClickDelete = (id) => {
+        const newItemList = items.filter(item => item.id !==id);
 
         setItems(newItemList);
-        setCount(count - 1);
+        setCount((count) => count - 1)
     };
 
-    const  onClickAdd = value => {
+    const onClickAdd = (value) => {
         const newItemList = [
-            items,
+            ...items,
             {
                 value,
                 isDone: false,
@@ -78,7 +70,7 @@ const App = () => {
         ];
 
         setItems(newItemList);
-        setCount(count + 1);
+        setCount((count) => count + 1)
     };
 
 
