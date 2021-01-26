@@ -18,15 +18,15 @@ const styles = {
 
 class Item extends React.Component {
     componentDidMount() {
-        console.log('componentDidMount');
+        this.timerID = setInterval(() => console.log('Утечка памяти'), 1000);
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('componentDidUpdate');
-    }
-
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     console.log('componentDidUpdate');
+    // }
+    //
     componentWillUnmount() {
-        console.log('componentWillUnmount');
+       clearInterval(this.timerID);
     }
 
     render() {
