@@ -1,4 +1,6 @@
 .wrap {
+    display: grid;
+    grid-template-areas: 'sidebar ... content content';
     margin: auto;
     width: 50%;
     font-family: Papyrus;
@@ -8,6 +10,21 @@
 .title {
     color: darkblue;
     margin-left: 15px;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.content {
+    grid-area: content;
+}
+
+.link {
+    text-decoration: none;
+    color: darkblue;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 
