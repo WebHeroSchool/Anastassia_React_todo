@@ -1,0 +1,11 @@
+.wrap {
+    margin: auto;
+    width: 100%;
+    font-family: Papyrus;
+}
+
+
+.title {
+    color: darkblue;
+    margin-left: 15px;
+}
