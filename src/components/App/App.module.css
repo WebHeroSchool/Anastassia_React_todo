@@ -2,7 +2,7 @@
     display: grid;
     grid-template-areas: 'sidebar ... content content';
     margin: auto;
-    width: 50%;
+    width: 80%;
     font-family: Papyrus;
 }
 

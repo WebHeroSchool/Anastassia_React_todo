@@ -1,3 +1,66 @@
 .wrap {
-    padding: 10px;
+     padding: 10px;
+ }
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px 0 10px;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: row;
+}
+
+.userInfo__header {
+    margin-top: 0;
+    text-align: center;
+}
+
+.userInfo__header a {
+    text-decoration: none;
+    color: black;
+}
+
+.avatar {
+    overflow: hidden;
+    border-radius: 10%;
+    width: 30%;
+    margin-right: 10px;
+    float: left;
+}
+
+.userInfo {
+    display: grid;
+}
+
+.repoList {
+    padding: 0 0 0 20px;
+}
+
+.repoItem a {
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+a:hover {
+    color: darkviolet;
+}
+
+.errorText {
+    color: #da2d2d;
+    text-align: center;
+}
+
+.avatar__contacts,
+.avatar__phone {
+    display: flex;
+    width: 20px;
+}
+
+.avatar__contacts_data,
+.avatar__contacts_phone {
+    padding-left: 10px;
 }
