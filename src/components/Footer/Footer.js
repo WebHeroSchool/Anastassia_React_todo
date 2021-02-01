@@ -1,27 +1,47 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import Button from '@material-ui/core/Button';
-
+import classnames from "classnames";
 import styles from './Footer.module.css';
 
-const Footer = ({count}) => (<div className={styles.wrap}>
-    <p className={styles.text} >Осталось выполнить вот столько дел: {count}</p>
-    <div className={styles.button}>
-        <Button variant="contained" color="primary">
-            All
-        </Button>
-        <Button variant="contained" color="primary">
-            Active
-        </Button>
-        <Button variant="contained" color="primary">
-            Completed
-        </Button>
-    </div>
-</div>);
+const Footer = ({items, onClickSort, sorting}) => {
+    const allTasks = items.length;
+    const completedTasks = items.filter(item => item.isDone).length;
+    const uncompletedTasks = items.filter(item => !item.isDone).length;
 
-Footer.propTypes = {
-    count: PropTypes.number.isRequired
+    return(
+        <div className={styles.footer_menu}>
+            <button
+                className={classnames({
+                    [styles.button]: true,
+                    [styles.selected]: sorting === 'Завершенные'
+                })}
+                onClick={()=>onClickSort('Завершенные')
+                }>
+                Завершённые
+                <span className={styles.task_count}> {completedTasks} </span>
+            </button>
+            <button
+                className={classnames({
+                    [styles.button]: true,
+                    [styles.selected]: sorting === 'Незавершенные'
+                })}
+                onClick={()=> onClickSort('Незавершенные')
+                }>
+                Незавершённые
+                <span className={styles.task_count}> {uncompletedTasks} </span>
+            </button>
+            <button
+                className={classnames({
+                    [styles.button]: true,
+                    [styles.selected]: sorting === 'Все'
+                })}
+                onClick={()=> onClickSort('Все')
+                }>
+                Все
+                <span className={styles.task_count}> {allTasks} </span>
+            </button>
+        </div>
+    )
 };
 
 export default Footer;

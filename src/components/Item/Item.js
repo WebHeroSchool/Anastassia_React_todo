@@ -1,65 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import {withStyles} from "@material-ui/core/styles";
-
-const styles = {
-    done: {
-        textDecoration: 'line-through',
-        color: 'dimgray'
-    }
-};
+import styles from "./Item.module.css";
+import classnames from "classnames";
 
 class Item extends React.Component {
-    componentDidMount() {
-        this.timerID = setInterval(() => console.log('Утечка памяти'), 1000);
-    }
+    state = {
+        task: this.props.task
+    };
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     console.log('componentDidUpdate');
-    // }
-    //
-    componentWillUnmount() {
-       clearInterval(this.timerID);
-    }
+    onChangeTask = e => {
+        this.setState ({
+            task: e.currentTarget.value
+        });
+        this.props.onChangeItem(this.props.id, e.currentTarget.value);
+    };
 
     render() {
-        const {value, isDone, classes, onClickDone, id, onClickDelete} = this.props;
-
-        return (<ListItem fullWidth>
-            <Checkbox
-                defaultChecked
-                color="primary"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-
-                checked={isDone}
-                tabIndex={-1}
-                onClick={() => onClickDone(id)}
-            />
-            <ListItemText primary={value} classes={{
-                root: isDone && classes.done
-            }} />
-            <ListItemSecondaryAction>
-                <IconButton aria-label="Comments">
-                    <DeleteIcon onClick={() => onClickDelete(id)}/>
-                </IconButton>
-            </ListItemSecondaryAction>
-        </ListItem>);
+        const {id, disabled, isDone} = this.props;
+        return(
+            <input
+                type='text'
+                className={
+                    classnames({
+                        [styles.item]: true,
+                        [styles.done]: isDone,
+                        [styles.edit_mode]: !disabled && !isDone
+                    })}
+                value={this.state.task}
+                id={id}
+                disabled={disabled}
+                onChange={this.onChangeTask}
+            />);
     }
 }
 
 Item.propTypes = {
-    value: PropTypes.string.isRequired,
     isDone: PropTypes.bool.isRequired,
-    onClickDone: PropTypes.func.isRequired,
-    id: PropTypes.number.isRequired,
-    onClickDelete: PropTypes.func.isRequired
+    task: PropTypes.oneOfType([
+        PropTypes.string.isRequired,
+        PropTypes.number.isRequired,
+        PropTypes.symbol.isRequired
+    ])
 };
 
-export default withStyles(styles) (Item);
+export default Item;

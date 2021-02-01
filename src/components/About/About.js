@@ -1,63 +1,73 @@
 import React from "react";
-// import CardContent from "@material-ui/core/CardContent";
+import Card from "@material-ui/core/Card";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {Octokit} from '@octokit/rest';
+import RepoList from "../RepoList/RepoList";
 
 import styles from "./About.module.css";
-
-import arroba from'./img/arroba.svg';
-import telegram from './img/telegram.svg';
-
 
 const octokit = new Octokit();
 
 class About extends React.Component {
     state ={
+        username: 'AnastassiaVarabei',
         isLoading: true,
         repoList: [],
         errorText: 'Возникла ошибка при получении данных',
         isError: false,
-        userData: []
+        userData: [],
+        firstRepo: 0,
+        lastRepo: 5
     };
 
     componentDidMount() {
         octokit.repos.listForUser({
-            username: 'AnastassiaVarabei'
+            username: this.state.username
         })
             .then(({ data }) => {
                 this.setState({
-                    repoList: data
+                    repoList: data,
+                    isLoading: false
                 });
             })
-            .catch(() => {
+            .catch(err => {
                 this.setState({
-                    isError: true
-                })
-            })
-            .finally(() => {
-                this.setState({
-                    isLoading: false
+                    isLoading: false,
+                    isError: true,
+                    errorText: err
                 })
             });
 
         octokit.users.getByUsername({
-            username: 'AnastassiaVarabei'
+            username: this.state.username
         })
-            .then((user) => {
+            .then(({data}) => {
                 this.setState({
-                    userData: user.data
+                    userData: data,
+                    isLoading: false,
                 })
             })
-            .catch(() => {
+            .catch(err => {
                 this.setState({
-                    isError: true
-                })
-            })
-            .finally(() => {
-                this.setState({
-                    isLoading: false
+                    isLoading: false,
+                    isError: true,
+                    errorText: err
                 })
             });
+    };
+
+    onClickNext = () => {
+        this.setState({
+            firstRepo: this.state.firstRepo + 5,
+            lastRepo: this.state.lastRepo + 5
+        });
+    };
+
+    onClickBack = () => {
+        this.setState({
+            firstRepo: this.state.firstRepo - 5,
+            lastRepo: this.state.lastRepo - 5
+        });
     };
 
     render() {
@@ -75,31 +85,44 @@ class About extends React.Component {
                         <div>
                             <p className={styles.avatar__title}> {userData.name} </p>
                             <p className={styles.avatar__subtitle}> {userData.bio} </p>
-                            <div className={styles.avatar__contacts}>
-                                <img alt='' src={arroba}/>
-                                <p className={styles.avatar__contacts_data}>anastassiavarabej@gmail.com</p>
-                            </div>
-                            <div className={styles.avatar__phone}>
-                                <img alt='' src={telegram}/>
-                                <p className={styles.avatar__contacts_phone}>+375(29)6880459</p>
-                            </div>
                         </div>
                     </p>
                 </div>
 
-                <div>
-                    <h1>{isLoading ? <CircularProgress /> : 'Мои репозитории:'}</h1>
-                    {!isLoading && <ol className={styles.repoList}>
-                        {repoList.map(item => (
-                            <li
-                                className={styles.repoItem}
-                                key={item.id}
-                            >
-                                <a href={item.html_url} target="__blank">{item.name}</a>
-                            </li>
-                        ))}
-                    </ol>}
-                </div>
+                <Card>
+                    <div className={styles.repos}>
+                        {isLoading ?
+                            <div>
+                                <h3> Список репозиториев на github.com </h3>
+                                <CircularProgress/>
+                            </div> :
+                            <div>
+                                {isError ?
+                                    <div>
+                                        <h3> Что-то пошло не так. Невозможно отобразить список репозиториев :( </h3>
+                                    </div> :
+                                    <div>
+                                        {repoList.length === 0 ?
+                                            <div>
+                                                <h3> Список репозиториев на github.com. К сожалению у Вас нет ниодного репозитория... </h3>
+                                            </div> :
+                                            <RepoList
+                                                repoList={repoList}
+                                                infoOfUser={userData}
+                                                onClickNext={this.onClickNext}
+                                                onClickBack={this.onClickBack}
+                                                firstRepo={this.state.firstRepo}
+                                                lastRepo={this.state.lastRepo}
+                                            />
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </Card>
+
+
             </div>
         );
         else
@@ -109,17 +132,6 @@ class About extends React.Component {
                 </h2>
             )
     };
-    //         <CardContent>
-    //             <h1 className={styles.wrap}>{isLoading ? <CircularProgress /> : 'My repositories'}</h1>
-    //             {!isLoading && <ol>
-    //                 {repoList.map(repo => (<li key={repo.id}>
-    //                     {repo.name}
-    //                 </li>) )}
-    //             </ol>}
-    //         </CardContent>
-    //     );
-    // }
 }
-
 
 export default About;
